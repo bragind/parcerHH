@@ -19,6 +19,5 @@ def extract_max_page():
 
     for page in paginator:
      pages.append(int(page.find('a').text))
-
  
   return pages[-1]
