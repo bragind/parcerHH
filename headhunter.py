@@ -1,6 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
-
+ITEMS = 100
+URL = 'https://hh.ru/search/vacancy?st=searchVacancy&text=python&items_on_page={ITEMS}' 
 def extract_max_page():
   headers = {
   'Host': 'hh.ru',
@@ -10,7 +11,7 @@ def extract_max_page():
   'Connection': 'keep-alive'
 }
 
-  hh_request = requests.get('https://hh.ru/search/vacancy? &items_on_page=100&st=searchVacancy&text=python', headers=headers)
+  hh_request = requests.get(URL, headers=headers)
 
   hh_soup = BeautifulSoup(hh_request.text, 'html.parser')
 
@@ -24,5 +25,7 @@ def extract_max_page():
 
 
   return  pages[-1]
-
-
+def extract_hh_jobs(last_page):
+  for page in range(last_page):
+      print(f'page={page}')
+  
