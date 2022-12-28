@@ -24,16 +24,14 @@ def extract_max_page():
   for page in paginator:
     pages.append(int(page.find('a').text))
 
-
-
   return  pages[-1]
 def extract_hh_jobs(last_page):
   jobs = []
  # for page in range(last_page):
   result = requests.get(f'{URL}&page=0',headers=headers)
-  #print(result.status_code)
+  print(result.status_code)
   soup = BeautifulSoup(result.text, 'html.parser')
-  results = soup.find_all('div',{'class':'vacancy-serp-item'})
-  #for result in results:
-  print(result.find('a').text)
+  results = soup.find_all('div',{'class': 'vacancy_search_suitable_item'})
+  for result in results:
+    print(result.find('a').text)
   return jobs
