@@ -1,5 +1,5 @@
 import requests
-
+from bs4 import BeautifulSoup
 headers = {
   'Host': 'hh.ru',
   'User-Agent': 'Safari',
@@ -8,5 +8,11 @@ headers = {
   'Connection': 'keep-alive'
 }
 hh_requests = requests.get('https://hh.ru/search/vacancy?text=python&items_on_page=100', headers=headers)
+hh_soup = BeautifulSoup(hh_requests.text, 'html.parser')
 
-print(hh_requests.text)
+paginator = hh_soup.find("div", {'class': 'pager'})
+
+pages = paginator.find_all('a')
+
+
+print(pages)
