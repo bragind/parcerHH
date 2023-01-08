@@ -1,4 +1,12 @@
-from headhunter import extract_max_page, extract_hh_jobs
+import requests
 
-max_page = extract_max_page()
-extract_hh_jobs(max_page)
+headers = {
+  'Host': 'hh.ru',
+  'User-Agent': 'Safari',
+  'Accept': '*/*',
+  'Accept-Encoding': 'qzip, deflate, br',
+  'Connection': 'keep-alive'
+}
+hh_requests = requests.get('https://hh.ru/search/vacancy?text=python&items_on_page=100', headers=headers)
+
+print(hh_requests.text)
