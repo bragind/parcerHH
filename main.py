@@ -10,9 +10,12 @@ headers = {
 hh_requests = requests.get('https://hh.ru/search/vacancy?text=python&items_on_page=100', headers=headers)
 hh_soup = BeautifulSoup(hh_requests.text, 'html.parser')
 
-paginator = hh_soup.find("div", {'class': 'pager'})
+pages = []
 
-pages = paginator.find_all('a')
+paginator = hh_soup.find_all("span", {'class': 'pager-item-not-in-short-range'})
+
+for page in paginator:
+  pages.append(int(page.find('a').text))
 
 
 print(pages)
