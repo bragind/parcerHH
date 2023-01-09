@@ -42,7 +42,7 @@ def extract_hh_jobs(last_page):
   result = requests.get(f'{URL}&page=0', headers = headers)
   print(result.status_code)
   soup = BeautifulSoup(result.text, 'html.parser')
-  results = soup.find_all('span',{'class': 'vacancy_search_suitable_item'})
+  results = soup.find_all('div',{'class': 'serp-item'})
   for result in results:
     print(result.find('a').text)
     
